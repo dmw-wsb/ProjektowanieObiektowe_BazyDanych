@@ -1,49 +1,64 @@
-import java.time.LocalDate; // importowanie klasy LocalDate z biblioteki do obsługi dat
-import java.time.Period; // importowanie klasy Period do obliczania okresów czasu
-import java.util.UUID; // importowanie klasy UUID do generowania unikalnych identyfikatorów
+package pl.wsb.hotel;
 
-// Deklaracja publicznej klasy Klient
+import java.time.LocalDate;
+
 public class Client {
-    private UUID id; // Prywatne pole 'id' do przechowywania unikalnego identyfikatora
-    private String imie; // Prywatne pole 'imie' do przechowywania imienia klienta
-    private String nazwisko; // Prywatne pole 'nazwisko' do przechowywania nazwiska klienta
-    private LocalDate dataUrodzenia; // Prywatne pole 'dataUrodzenia' do przechowywania daty urodzenia
+    private String id;
+    private String firstName;
+    private String lastName;
+    private LocalDate birthDate;
 
-    // Konstruktor klasy Klient przyjmujący imię, nazwisko i datę urodzenia
-    public Client(String imie, String nazwisko, LocalDate dataUrodzenia) {
-        this.id = UUID.randomUUID(); // Przypisywanie nowego unikalnego identyfikatora do pola 'id'
-        this.imie = imie; // Przypisywanie imienia do pola 'imie'
-        this.nazwisko = nazwisko; // Przypisywanie nazwiska do pola 'nazwisko'
-        this.dataUrodzenia = dataUrodzenia; // Przypisywanie daty urodzenia do pola 'dataUrodzenia'
+    private String specialDiet;
+    private boolean isVIP;
+    private int stayCount = 0;
+
+    private static long idCounter = 0;
+    private static String createID() {
+        return String.valueOf(idCounter++);
     }
 
-    // Metoda 'wiek' do obliczania aktualnego wieku klienta
-    public int getWiek() {
-        return Period.between(dataUrodzenia, LocalDate.now()).getYears();
+    public Client(String firstName, String lastName, LocalDate birthDate, boolean isVIP){ // default specialDiet to ""
+        this(firstName, lastName, birthDate, isVIP, "");
     }
 
-    // Metoda 'pelneImie' do pobierania pełnego imienia i nazwiska klienta
-    public String getPelneImie() {
-        return imie + " " + nazwisko;
+    public Client(String firstName, String lastName, LocalDate birthDate, boolean isVIP, String specialDiet){
+        this.id = createID();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+        this.isVIP = isVIP;
+        this.specialDiet = specialDiet;
     }
 
-    // Gettery do pozostałych pól (settery mogą być dodane w razie potrzeby)
-    public UUID getId() {
-        return id;
+    public int getAge(){
+        return LocalDate.now().getYear() - birthDate.getYear();
     }
 
-    public String getImie() {
-        return imie;
+    public String getFullName(){
+        return firstName + " " + lastName;
     }
 
-    public String getNazwisko() {
-        return nazwisko;
+    public int getStayCount() {
+        return stayCount;
     }
 
-    public LocalDate getDataUrodzenia() {
-        return dataUrodzenia;
+    public void incStayCount(){
+        stayCount+=1;
     }
 
-    // Tu można dodać settery, jeśli istnieje potrzeba modyfikacji pól
-    // ...
+    public boolean getIsVIP(){
+        return isVIP;
+    }
+
+    public void debugPrintId(){
+        System.out.println(id);
+    }
+
+    public void printInformation(){
+        System.out.println("Client full name: " + getFullName());
+        System.out.println("Client age: " + getAge());
+        System.out.println("Client birth date: " + birthDate);
+        System.out.println("Client has following diets: " + specialDiet);
+        System.out.println("Client has stayed in this hotel " + stayCount + " times");
+    }
 }

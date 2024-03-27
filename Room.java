@@ -1,41 +1,45 @@
-import java.util.UUID;
+package pl.wsb.hotel;
 
 public class Room {
-    private UUID id; // Unikalny identyfikator pokoju
-    private String opis; // Opis pokoju
-    private double powierzchnia; // Powierzchnia pokoju w metrach kwadratowych
-    private int pietro; // Numer piętra, na którym znajduje się pokój
-    private boolean czyMaLozkoKrolewskie; // Informacja czy pokój posiada łóżko typu king-size
+    private String id; // room number
+    private String description;
+    private double area;
+    private int floor;
+    private boolean hasKingSizeBed;
 
-    public Room(String opis, double powierzchnia, int pietro, boolean czyMaLozkoKrolewskie) {
-        this.id = UUID.randomUUID(); // Generowanie unikalnego ID
-        this.opis = opis;
-        this.powierzchnia = powierzchnia;
-        this.pietro = pietro;
-        this.czyMaLozkoKrolewskie = czyMaLozkoKrolewskie;
+    private int maxPeopleCapacity;
+    private boolean hasBathtub;
+    private double prize;
+
+    public Room(String id,
+                String description,
+                double area,
+                int floor,
+                boolean hasKingSizeBed,
+                int maxPeopleCapacity,
+                boolean hasBathtub,
+                double prize){
+        this.id = id;
+        this.description = description;
+        this.area = area;
+        this.floor = floor;
+        this.hasKingSizeBed = hasKingSizeBed;
+        this.maxPeopleCapacity = maxPeopleCapacity;
+        this.hasBathtub = hasBathtub;
+        this.prize = prize;
     }
 
-    // Gettery (settery mogą być dodane jeśli będą potrzebne)
-    public UUID getId() {
-        return id;
+    public double getPrize() {
+        return prize;
     }
 
-    public String getOpis() {
-        return opis;
+    public void printInformation(){
+        System.out.println("Room number: " + id);
+        System.out.println("Room description: " + description);
+        System.out.println("Room size: " + area);
+        System.out.println("Room is on floor " + floor);
+        System.out.println("Room " + (hasKingSizeBed ? "has" : "doesn't have") + " king size bed");
+        System.out.println("Room " + (hasBathtub ? "has bathtub" : "has shower"));
+        System.out.println("Room for " + maxPeopleCapacity + (maxPeopleCapacity==1 ? " person" : " people"));
     }
-
-    public double getPowierzchnia() {
-        return powierzchnia;
-    }
-
-    public int getPietro() {
-        return pietro;
-    }
-
-    public boolean isCzyMaLozkoKrolewskie() {
-        return czyMaLozkoKrolewskie;
-    }
-
-    // Settery mogą być tutaj, jeśli będzie taka potrzeba
-    // ...
 }
