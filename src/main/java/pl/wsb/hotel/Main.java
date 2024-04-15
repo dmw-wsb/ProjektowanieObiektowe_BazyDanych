@@ -48,5 +48,25 @@ public class Main {
         System.out.println("RR2 price: " + rr2.calculatePrice());
         System.out.println();
 
+
+        Hotel h = new Hotel("VeryFancy");
+        h.printInformation();
+
+        h.addClient(c1);
+        h.addClient(c2);
+
+        h.addRoom(r1);
+        h.addRoom(r2);
+
+        h.addReservation(rr1);
+        h.addReservation(rr2);
+
+        SpecialService s1 = new LuggageService();
+        SpecialService s2 = new TimeService();
+
+        h.addService(s1);
+        h.addService(s2);
+
+        h.printInformation();
     }
 }

@@ -3,18 +3,25 @@ package pl.wsb.hotel;
 import java.time.LocalDate;
 
 public class Client {
-    private String id;
-    private String firstName;
-    private String lastName;
-    private LocalDate birthDate;
+    protected String id;
+    protected String firstName;
+    protected String lastName;
+    protected LocalDate birthDate;
 
-    private String specialDiet;
-    private boolean isVIP;
-    private int stayCount = 0;
+    protected String specialDiet;
+    protected boolean isVIP;
+    protected int stayCount = 0;
 
     private static long idCounter = 0;
-    private static String createID() {
+    protected static String createID() {
         return String.valueOf(idCounter++);
+    }
+
+    public Client(String firstName, String lastName, LocalDate birthDate) {
+        this.id = createID();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
     }
 
     public Client(String firstName, String lastName, LocalDate birthDate, boolean isVIP){ // default specialDiet to ""
